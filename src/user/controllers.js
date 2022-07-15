@@ -57,7 +57,8 @@ exports.login = async (req, res) => {
     if (!req.user) {
       throw new Error("Incorrect Credentials");
     } else {
-      res.send({ user: req.user });
+      const token = jwt.sign({ id: req.user._id }, process.env.SECRET);
+      res.send({ user: req.user, token });
     }
   } catch (error) {
     console.log(error);
