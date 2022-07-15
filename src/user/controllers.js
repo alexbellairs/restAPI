@@ -25,9 +25,9 @@ exports.searchUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    await User.deleteOne({ username: req.params.username });
+    await User.deleteOne({ username: req.user.username });
     res.end();
-    console.log(req.params.username);
+    console.log(req.user.username);
   } catch (error) {
     console.log(error);
     res.send({ error });

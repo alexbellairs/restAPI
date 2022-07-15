@@ -15,7 +15,7 @@ userRouter.post("/login", unhashPass, login); //defining a post request on /logi
 userRouter.get("/user", searchUser);
 userRouter.get("/user/:username", listUser);
 userRouter.get("/token", tokenCheck, login);
-userRouter.delete("/user/:username", deleteUser);
+userRouter.delete("/user", tokenCheck, deleteUser);
 userRouter.patch("/user", hashPass, editUser);
 
 module.exports = userRouter;

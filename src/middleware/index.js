@@ -7,7 +7,15 @@ exports.hashPass = async (req, res, next) => {
     // const tempPass = req.body.password; //grabbed password variable from body, and stored it locally
     // const hashedPass = await bcrypt.hash(tempPass, 8); //hashed the password and stored it as new constant
     //req.body.password = hashedPass; //stores hashed password back in the req body
-    req.body.password = await bcrypt.hash(req.body.password, 8); //combines above code into one line
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(req.body.password, 8); //combines above code into one line
+    } else if (req.body.updateObj.password) {
+      req.body.updateObj.password = await bcrypt.hash(
+        req.body.updateObj.password,
+        8
+      );
+    }
+
     next(); //moves onto next middleware/controller in endpoint
   } catch (error) {
     console.log(error);
